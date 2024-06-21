@@ -48,7 +48,8 @@ func StartServer(lc fx.Lifecycle, e *echo.Echo, config *config.AppConfig) {
 	lc.Append(fx.Hook{
 		OnStart: func(context.Context) error {
 			go func() {
-				if err := e.Start(config.Port); err != nil && err != http.ErrServerClosed {
+				port := ":" + config.Port
+				if err := e.Start(port); err != nil && err != http.ErrServerClosed {
 					log.Fatalf("shutting down the server: %v", err)
 				}
 			}()

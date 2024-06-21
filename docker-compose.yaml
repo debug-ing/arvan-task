@@ -1,0 +1,22 @@
+version: '3'
+services:
+  discount:
+    build:
+      context: ./discount
+      dockerfile: Dockerfile.discount
+    ports:
+      - "${DISCOUNT_PORT}:8081"
+    environment:
+      DATABASE_URL: "${DISCOUNT_DB_URL}"
+      PORT: "8081"
+      WALLET_URL: "http://wallet:8082"
+
+  wallet:
+    build:
+      context: ./wallet
+      dockerfile: Dockerfile.wallet
+    ports:
+      - "${WALLET_PORT}:8082"
+    environment:
+      DATABASE_URL: "${WALLET_DB_URL}"
+      PORT: "8082"
