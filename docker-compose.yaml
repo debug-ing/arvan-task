@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile.discount
     ports:
       - "${DISCOUNT_PORT}:8081"
+    depends_on:
+      - wallet
     environment:
       DATABASE_URL: "${DISCOUNT_DB_URL}"
       PORT: "8081"
